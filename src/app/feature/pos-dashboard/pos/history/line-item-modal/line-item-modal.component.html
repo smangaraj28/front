@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Order #: {{this.data.orderDate}}</h1>
+<mat-dialog-content>
+  <h3 class="num-items">Items: {{this.data.numItems}}</h3>
+  <li *ngFor="let item of this.data.items" class="flex flex-direction-row align-items-center" class="line-item">
+    <p>{{item.itemName}} => {{item.itemPrice | currency:'INR':"symbol"}} * Qty: {{item.itemQuantity}} = Total: {{(item.itemQuantity * item.itemPrice) | currency:'INR':"symbol"}}</p>
+    <hr>
+  </li>
+  <h3 class="total">Total: {{this.data.total | currency:'INR':"symbol"}}</h3>
+</mat-dialog-content>

@@ -1,0 +1,40 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.login-card {
+  display: block;
+  max-width: 550px;
+  min-width: 300px;
+}
+
+.example-stretched-tabs {
+  max-width: 550px;
+}
+
+.divider {
+	width:500px;
+  text-align:center;
+  color: red;
+
+}
+
+.divider hr {
+	margin-left:auto;
+	margin-right:auto;
+  width:40%;
+}
+
+.left {
+  float:left;
+
+}
+
+.right {
+  float:right;
+
+}

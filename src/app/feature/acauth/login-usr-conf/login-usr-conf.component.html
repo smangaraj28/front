@@ -1,0 +1,13 @@
+<p>
+  login-usr-conf works!
+</p>
+
+<div *ngIf="(user$ | async) as match">
+    <p> You are logging in as {{match.email}} </p>
+
+  <button mat-raised-button  (click)="proceed(match)">Proceed with {{match.email}}</button>
+  <button mat-raised-button (click) = "changeuser()">Logout and Login as different user</button>
+</div>
+
+
+

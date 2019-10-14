@@ -1,0 +1,17 @@
+<mat-card class="add-margin">
+  <mat-card-title>Recent Transactions</mat-card-title>
+  <mat-list class="history">
+    <mat-list-item *ngFor="let item of history | async" class="flex flex-direction-row line-item" (click)="openDialog(item)">
+      <mat-icon mat-list-icon  class="order-detail ">access_time</mat-icon>
+      <h4 class="order-detail">{{item.orderDate | date:'short'}}</h4>
+      <h4 class="order-detail">Items: {{item.orderCartNumItems}}</h4>
+      <h4 class="order-detail">Total: {{item.orderCartTotal | currency:'INR':"symbol"}}</h4>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+
+  <mat-card-actions>
+    <button mat-button routerLink="/billings/transactions">View All Transactions</button>
+  </mat-card-actions>
+
+</mat-card>

@@ -1,0 +1,21 @@
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex="44%" fxFlex.lt-md="10%"></div>
+    <div fxFlex="56%" fxFlex.lt-md="70%">
+        Please Select A Module ?
+    </div>
+</mat-toolbar>
+<div style="margin: 3% 4%;" *ngIf="moduleFlag" fxLayout="row wrap">
+    <ng-container *ngFor="let component of iModules">
+        <div fxFlex="30%" class="component-card" [routerLink]="component.route">
+            <div class="component-card__preview"
+                 [style.background-image]="'url(' + this.modulesPreviewPath + component.previewImage + ')'">
+            </div>
+            <p class="component-card__pre-title">
+                {{ (component.display | titlecase) || '' }}
+            </p>
+            <h4 class="component-card__title">
+                {{ component.display }}
+            </h4>
+        </div>
+    </ng-container>
+</div>

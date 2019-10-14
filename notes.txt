@@ -1,0 +1,47 @@
+This is to Merge Dev changes to Master in the same repository
+--------------------------------------------------------------
+(on branch development)$ git merge master
+(resolve any merge conflicts if there are any)
+$ git checkout master
+ //If you want to keep track of who did the merge and when, you can use --no-ff flag while mergin
+$ git merge --no-ff development
+  //else
+$ git merge development (there won't be any conflicts now)
+
+How to catch up my git fork to master
+-------------------------------------
+https://garygregory.wordpress.com/2016/11/10/how-to-catch-up-my-git-fork-to-master/
+To sync up upstrem dev with forked dev (example seed dev with kanaban dev)
+
+$ git remote -v
+origin  https://kirkum80@bitbucket.org/natteam/kanban.git (fetch)
+origin  https://kirkum80@bitbucket.org/natteam/kanban.git (push)
+
+Upstream repository is not set in the kanban repository.
+set upstream
+$ git remote add upstream https://kirkum80@bitbucket.org/natteam/angularseed.git
+$ git remote -v
+    origin  https://kirkum80@bitbucket.org/natteam/kanban.git (fetch)
+    origin  https://kirkum80@bitbucket.org/natteam/kanban.git (push)
+    upstream        https://kirkum80@bitbucket.org/natteam/angularseed.git (fetch)
+    upstream        https://kirkum80@bitbucket.org/natteam/angularseed.git (push)
+
+$ git fetch upstream
+    Password for 'https://kirkum80@bitbucket.org': 
+    remote: Counting objects: 23, done.
+    remote: Compressing objects: 100% (23/23), done.
+    remote: Total 23 (delta 17), reused 0 (delta 0)
+    Unpacking objects: 100% (23/23), done.
+    From https://bitbucket.org/natteam/angularseed
+    * [new branch]      dev        -> upstream/dev
+    * [new branch]      master     -> upstream/master
+
+upstream has 2 branches.
+If you want to sync up kanban (forked local) dev with upstream dev checkout kanaban dev now
+
+$ git checkout dev
+    Branch 'dev' set up to track remote branch 'dev' from 'origin'.
+    Switched to a new branch 'dev'
+
+ #Changes from upstream dev is synced to kanban (forked local)
+$ git merge upstream/dev

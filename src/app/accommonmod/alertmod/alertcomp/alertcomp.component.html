@@ -1,0 +1,18 @@
+<div *ngIf="notify.alertmsg | async as msg">
+  <div *ngFor="let m of msg">
+    <div *ngIf = "alert_id === m.id">
+
+      <mat-card class="alert"
+        [ngClass]="{ 
+          'is-danger': m.style == 'error',
+          'is-success': m.style == 'success',
+          'is-info': m.style == 'info'
+        }">
+        
+        <span class="closebtn" *ngIf = "m.canclose === 'yes'" (click)="notify.clearalertmsg()">{{notify.alertticks}} &times;</span>  
+        <!--{{ m.content }}    --> 
+        <div [innerHTML]= "sanitizemy(m.content)"></div>
+      </mat-card>
+  </div>
+  </div>
+</div>

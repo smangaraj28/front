@@ -1,0 +1,221 @@
+<div class="top_card">
+  <mat-card>
+    <mat-toolbar color="primary" style="position: sticky;top: 0;z-index: 1000;position: -webkit-sticky;" fxLayout="row"
+                 fxLayoutAlign="start center">
+      <div fxFlex="90%" fxFlex.lt-md="70%">
+        Entity Maintenance
+      </div>
+      <div fxFlex="10%" fxFlex.lt-md="10%">
+        <button mat-icon-button [class.disabled-button]="newEntryFlag" (click)="addNew()">
+          Add Entity
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <mat-card-content>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="25%">
+          <mat-label>Filter By Anything</mat-label>
+          <input matInput #filter placeholder="Filter By Entity Name" [(ngModel)]="filterValue"
+                 (ngModelChange)="filterValueChange($event)">
+        </mat-form-field>
+        <mat-paginator fxFlex="50%" #paginator
+                       [length]="clonedEntityDataSource.length"
+                       [pageIndex]="0" [pageSize]="10" showFirstLastButtons
+                       [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+      </div>
+      <div>
+        <mat-table #table [dataSource]="clonedEntityDataSource" matSort class="mat-cell">
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Serial No</mat-header-cell>
+            <mat-cell *matCellDef="let row; let i=index;">{{i + 1}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="entityName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.entityName}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="entityCity">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.entityCity}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="entityMobile">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Contacts</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.entityMobile}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="entityStartDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Opening Date</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.entityStartDate}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="entityStatus">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.entityStatus}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef="let row; let i=index;">
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row; let i=index;">
+              <button mat-icon-button color="primary" (click)="startEdit(i+1, row)" [disabled]="newEntryFlag">
+                <mat-icon aria-label="Edit">edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" [disabled]="newEntryFlag" (click)="deleteItem(i, row)">
+                <mat-icon aria-label="Delete">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <div class="no-results" [style.display]="clonedEntityDataSource.length == 0 ? '' : 'none'">
+          No Entity
+        </div>
+      </div>
+      <div style="margin-top: 20px" *ngIf="newEntryFlag">
+        <mat-card
+          style="box-shadow: 0 -4px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);">
+          <mat-card-content>
+            <div fxLayout="column" [formGroup]="entityForm">
+              <div fxLayout=“row” fxLayoutAlign="start center">
+                <div fxFlex="45%">
+                  <b style="font-size: x-large">{{subCardLabel}} Entity Details:</b>
+                </div>
+                <div fxLayout=“row” fxLayoutAlign="center center" class="example-small-box mat-elevation-z4">
+                  <input style="display: none"
+                         type="file" (change)="onFileChanged($event)"
+                         #fileInput>
+                  <button (click)="fileInput.click()">Add LOGO</button>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.lt-md="column" fxLayoutGap="20px"
+                   fxLayoutGap.lt-md="0px">
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityNameFormControl"
+                         type="text" placeholder="Hotel Name" [(ngModel)]="entityData.entityName" name="id" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityShortNameFormControl"
+                         type="text" placeholder="Hotel Short Name" [(ngModel)]="entityData.entityShortName" name="id"
+                         required>
+                </mat-form-field>
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityDescriptionFormControl"
+                         type="text" placeholder="Hotel Description" [(ngModel)]="entityData.entityDescription"
+                         name="desc"
+                         required>
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.lt-md="column" fxLayoutGap="20px"
+                   fxLayoutGap.lt-md="0px">
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityIndustryFormControl"
+                         type="text" placeholder="Industry" [(ngModel)]="entityData.entityIndustry" name="id" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityTaxIDFormControl"
+                         type="text" placeholder="Tax ID" [(ngModel)]="entityData.entityTaxID" name="id" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityStatusFormControl"
+                         type="text" placeholder="Status" [(ngModel)]="entityData.entityStatus" name="status" required>
+                </mat-form-field>
+              </div>
+              <div fxLayout=“row” fxLayoutAlign="start center">
+                <b>Address Details:</b>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.lt-md="column" fxLayoutGap="20px"
+                   fxLayoutGap.lt-md="0px">
+                <mat-form-field fxFlex="50%">
+                  <input matInput formControlName="entityAddLine1FormControl"
+                         type="text" placeholder="Address Line 1" [(ngModel)]="entityData.entityAddLine1" name="id"
+                         required>
+                </mat-form-field>
+                <mat-form-field fxFlex="50%">
+                  <input matInput formControlName="entityAddLine2FormControl"
+                         type="text" placeholder="Address Line 2" [(ngModel)]="entityData.entityAddLine2" name="id"
+                         required>
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.lt-md="column" fxLayoutGap="20px"
+                   fxLayoutGap.lt-md="0px">
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityCityFormControl"
+                         type="text" placeholder="City" [(ngModel)]="entityData.entityCity" name="id" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityStateFormControl"
+                         type="text" placeholder="State" [(ngModel)]="entityData.entityState" name="id" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityCountryFormControl"
+                         type="text" placeholder="Country" [(ngModel)]="entityData.entityCountry" name="id" required>
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.lt-md="column" fxLayoutGap="20px"
+                   fxLayoutGap.lt-md="0px">
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityPinCodeFormControl"
+                         type="text" placeholder="Pin Code" [(ngModel)]="entityData.entityPinCode" name="id" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityPhoneFormControl"
+                         type="text" placeholder="Phone" [(ngModel)]="entityData.entityPhone" name="id" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityFaxFormControl"
+                         type="text" placeholder="Fax" [(ngModel)]="entityData.entityFax" name="id" required>
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.lt-md="column" fxLayoutGap="20px"
+                   fxLayoutGap.lt-md="0px">
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityWebsiteFormControl"
+                         type="text" placeholder="Website" [(ngModel)]="entityData.entityWebsite" name="id" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityEmailFormControl"
+                         type="text" placeholder="Email" [(ngModel)]="entityData.entityEmail" name="id" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="30%">
+                  <input matInput formControlName="entityMobileFormControl"
+                         type="text" placeholder="Mobile" [(ngModel)]="entityData.entityMobile" name="id" required>
+                </mat-form-field>
+              </div>
+              <div fxLayout=“row” fxLayoutAlign="start center">
+                <b>Other Details:</b>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.lt-md="column" fxLayoutGap="20px"
+                   fxLayoutGap.lt-md="0px">
+                <mat-form-field fxFlex="30%">
+                  <mat-label>Start Date</mat-label>
+                  <input matInput type="date" placeholder="Start Date" [(ngModel)]="entityData.entityStartDate"
+                         name="sdate" formControlName="entityStartDateFormControl" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="30%">
+                  <mat-label>Fiscal Year</mat-label>
+                  <input matInput type="number" placeholder="Fiscal Year" [(ngModel)]="entityData.entityFiscalYear"
+                         name="fyear" formControlName="entityFiscalYearFormControl" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="30%">
+                  <mat-label>Time Zone</mat-label>
+                  <input matInput type="text" placeholder="Time Zone" [(ngModel)]="entityData.entityTimeZone"
+                         formControlName="entityTimeZoneFormControl" name="tzone">
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+            <button fxFlex="15%" mat-raised-button color="primary" (click)="onSave()">
+              <mat-icon>save</mat-icon>
+              Save Hotels
+            </button>
+            <button fxFlex="15%" mat-raised-button color="warn" (click)="onCancel()">
+              <mat-icon>cancel</mat-icon>
+              Cancel
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+

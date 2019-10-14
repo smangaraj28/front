@@ -1,0 +1,97 @@
+{
+  "food": [
+    {
+      "itemId": 12,
+      "itemName": "adaf",
+      "itemPrice": 132,
+      "itemType": "food",
+      "itemImgName": "fadf",
+      "itemImgUrl": "fadfad",
+      "itemQuantity": 12
+    },
+    {
+      "itemId": 12,
+      "itemName": "adaf",
+      "itemPrice": 132,
+      "itemType": "food",
+      "itemImgName": "fadf",
+      "itemImgUrl": "fadfad",
+      "itemQuantity": 12
+    },
+    {
+      "itemId": 12,
+      "itemName": "adaf",
+      "itemPrice": 132,
+      "itemType": "food",
+      "itemImgName": "fadf",
+      "itemImgUrl": "fadfad",
+      "itemQuantity": 12
+    },
+    {
+      "itemId": 12,
+      "itemName": "adaf",
+      "itemPrice": 132,
+      "itemType": "food",
+      "itemImgName": "fadf",
+      "itemImgUrl": "fadfad",
+      "itemQuantity": 12
+    },
+    {
+      "itemId": 12,
+      "itemName": "adaf",
+      "itemPrice": 132,
+      "itemType": "food",
+      "itemImgName": "fadf",
+      "itemImgUrl": "fadfad",
+      "itemQuantity": 12
+    }
+  ],
+  "drink": [
+    {
+      "itemId": 12,
+      "itemName": "adaf",
+      "itemPrice": 132,
+      "itemType": "drink",
+      "itemImgName": "fadf",
+      "itemImgUrl": "fadfad",
+      "itemQuantity": 12
+    },
+    {
+      "itemId": 12,
+      "itemName": "adaf",
+      "itemPrice": 132,
+      "itemType": "drink",
+      "itemImgName": "fadf",
+      "itemImgUrl": "fadfad",
+      "itemQuantity": 12
+    },
+    {
+      "itemId": 12,
+      "itemName": "adaf",
+      "itemPrice": 132,
+      "itemType": "drink",
+      "itemImgName": "fadf",
+      "itemImgUrl": "fadfad",
+      "itemQuantity": 12
+    },
+    {
+      "itemId": 12,
+      "itemName": "adaf",
+      "itemPrice": 132,
+      "itemType": "drink",
+      "itemImgName": "fadf",
+      "itemImgUrl": "fadfad",
+      "itemQuantity": 12
+    },
+    {
+      "itemId": 12,
+      "itemName": "adaf",
+      "itemPrice": 132,
+      "itemType": "drink",
+      "itemImgName": "fadf",
+      "itemImgUrl": "fadfad",
+      "itemQuantity": 12
+    }
+  ],
+  "error": "null"
+}

@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$primary : $mat-indigo;
+$accent  : $mat-orange;
+$warn    : $mat-red;
+
+body { 
+    font-family: Roboto, Arial, sans-serif;
+    margin: 0;
+  }
+  .spinner {
+    margin: 50vh auto 0;
+    width: 70px;
+    text-align: center;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+
+
+  border-radius: 100%;
+  display: inline-block;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.bounce3 {
+    background-color: orange;
+}
+
+.spinner .bounce1 {
+    background-color: blue;
+  animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+    background-color: red;
+  animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { transform: scale(0) }
+  40% { transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0);
+    transform: scale(0);
+  } 40% {
+    transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}

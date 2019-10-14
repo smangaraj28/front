@@ -1,0 +1,122 @@
+<div class="top_card">
+  <mat-card>
+    <mat-toolbar color="primary" style="position: sticky;top: 0;z-index: 1000;position: -webkit-sticky;" fxLayout="row"
+                 fxLayoutAlign="start center">
+      <div fxFlex="70%" fxFlex.lt-md="70%">
+        User Maintenance
+      </div>
+      <div fxFlex="20%" [class.disabled-button]="newEntryFlag">
+        <mat-form-field>
+          <mat-label>Entity Selection</mat-label>
+          <mat-select (selectionChange)="entitySelectionChange($event)" [(ngModel)]="selectedEntity" name="entity">
+            <mat-option value="ALL">ALL</mat-option>
+            <mat-option *ngFor="let entity of entityLists" [value]="entity">
+              {{entity}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex="10%" fxFlex.lt-md="10%">
+        <button mat-button [class.disabled-button]="newEntryFlag" (click)="addNew()">
+          Add User
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <mat-card-content>
+      <div>
+        <app-user-table-expandable-rows (startEditEmitter)="onStartEditClicked($event)"
+                                        (startDeleteEmitter)="onStartDeleteClicked($event)"
+                                        (startFilterEmitter)="onStartFilterClicked($event)"
+                                        [startDisableToggle]="newEntryFlag"
+                                        [moduleData]="clonedUserDataSource"></app-user-table-expandable-rows>
+      </div>
+      <div style="margin-top: 20px" *ngIf="newEntryFlag">
+        <mat-card
+          style="box-shadow: 0 -4px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);">
+          <mat-card-content>
+            <div fxLayout=“row” fxLayoutAlign="space-between center" [formGroup]="userForm">
+              <div fxFlex="23%"><b style="font-size: x-large"> {{subCardLabel}} User Details:</b></div>
+              <div fxFlex="23%">
+                <mat-form-field>
+                  <mat-label>Entity Name</mat-label>
+                  <mat-select [(ngModel)]="entityName"
+                              formControlName="entityNameFormControl" name="entity">
+                    <mat-option *ngFor="let entity of entityLists" [value]="entity">
+                      {{entity}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxFlex="23%">
+                <mat-form-field>
+                  <mat-label>User Name</mat-label>
+                  <input matInput placeholder="Role Name"
+                         formControlName="userNameFormControl" [(ngModel)]="userName">
+                </mat-form-field>
+              </div>
+              <div fxFlex="23%">
+                <mat-form-field>
+                  <mat-label>First Time Password</mat-label>
+                  <input matInput placeholder="First Time Password"
+                         formControlName="userPasswordFormControl" [(ngModel)]="userPassword">
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+              <div fxFlex="45%" [class.disabled-content]="userTableFlag">
+                <app-drag-drop-dual-list [leftTitle]="leftTitleDragDrop" [rightTitle]="rightTitleDragDrop"
+                                         [selectedModuleName]="selectedBranchName"
+                                         [availableModuleName]="availableBranchName"></app-drag-drop-dual-list>
+              </div>
+              <div fxFlex="10%" fxLayoutAlign="center center">
+                <button *ngIf="!proceedClickFlag" color="accent" mat-raised-button (click)="proceed()"
+                        [disabled]="selectedBranchName.length === 0">Proceed >
+                </button>
+                <button *ngIf="proceedClickFlag" color="warn" mat-raised-button (click)="reset()">< Reset</button>
+              </div>
+              <div *ngIf="userTableFlag" fxFlex="45%">
+                <h2>Select Roles</h2>
+                <div style="height: 360px; overflow: auto;">
+                  <mat-table *ngIf="userTableFlag" [dataSource]="branchRoleTable" class="mat-elevation-z8">
+                    <ng-container matColumnDef="branchName">
+                      <mat-header-cell *matHeaderCellDef>Branch Name</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.branchName}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="branchRole">
+                      <mat-header-cell *matHeaderCellDef>Branch Role</mat-header-cell>
+                      <mat-cell *matCellDef="let element">
+                        <mat-form-field>
+                          <mat-select [(ngModel)]="element.branchRole" name="role" placeholder="Branch Role">
+                            <mat-option *ngFor="let entity of roleList" [value]="entity">
+                              {{entity}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+            <button fxFlex="20%" mat-raised-button color="primary" (click)="onSave()">
+              <mat-icon>save</mat-icon>
+              Save Users
+            </button>
+            <button fxFlex="20%" mat-raised-button color="warn" (click)="onCancel()">
+              <mat-icon>cancel</mat-icon>
+              Cancel
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+

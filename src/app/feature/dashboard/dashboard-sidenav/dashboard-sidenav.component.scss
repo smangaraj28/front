@@ -1,0 +1,43 @@
+@mixin auth($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+
+  .sidenav {
+    background: mat-color($primary, 400);
+    overflow: hidden;
+    position: relative;
+    width: 250px;
+  }
+  .drawer {
+    background: mat-color($primary, 400);
+    overflow: hidden;
+    position: relative;
+    width: 80px;
+  }
+  [no-over-flow] {
+    overflow: hidden;
+  }
+  .router-outlet {
+    position: relative;
+    padding: 0 5px;
+  }
+  .spacer {
+    width: 100%;
+  }
+}
+
+.content-scrollbar {
+  //width: 100%;
+  height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 1;
+  flex-grow: 1;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  overflow-y: auto;
+}

@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css?family=Hind+Madurai:300|Lora:400i|Montserrat:700');
+
+:root {
+    --main-font: 'Montserrat';
+    --main-color: #3f51b5;
+    --secondary-font: 'Lora';
+    --body-font: 'Hind Madurai';
+}
+
+p {
+    font-family: var(--body-font);
+}
+
+h1 {
+    font-family: var(--main-font);
+    font-size: 2rem;
+}
+
+h3 {
+    font-family: var(--body-font);
+    font-size: 1.15rem;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-direction-row {
+    flex-direction: row;
+}
+
+.flex-direction-column {
+    flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.align-content-center {
+    align-content: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-around {
+    justify-content: space-around;
+}
+
+.add-margin {
+    margin: 1rem;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.add-margin1 {
+    margin-top: 30px;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.add-padding {
+    padding: 1rem;
+}
+
+.padding-horizontal {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.container {
+    margin: 2rem;
+}
+
+.title {
+    flex: 1 1 auto;
+    text-align: center;
+    color: blue;
+}
+
+.data {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+mat-form-field {
+    margin-right: 1rem;
+}
+
+.new-item-action-row {
+    padding: 50px 42% 50px;
+}
+
+.product-image {
+    max-width: 4rem;
+    max-height: 4rem;
+    margin-top: 0.75rem;
+    margin-right: 1rem;
+}
+
+.file-upload {
+    position: relative;
+    display: inline-block;
+}
+
+.file-upload__label {
+    display: block;
+    padding: 1em 2em;
+    color: #fff;
+    background: rgb(97, 97, 97);
+    border-radius: .4em;
+    transition: background .3s;
+    text-align: center;
+    height: 3rem;
+    max-width: 15%;
+    margin-top: 0.75rem;
+}
+
+.file-upload__label:hover {
+    cursor: pointer;
+    background-color: #007ACC;
+}
+
+.file-upload__input {
+    position: relative;
+    font-size: medium;
+    width: 0;
+    height: 100%;
+    opacity: 0;
+}
+
+.file-upload__input:hover {
+    cursor: pointer;
+    background-color: #007ACC;
+}

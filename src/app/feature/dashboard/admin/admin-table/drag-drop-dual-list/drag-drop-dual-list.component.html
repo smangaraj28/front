@@ -1,0 +1,30 @@
+<div fxLayout="row">
+  <div fxFlex="45%">
+    <h2>{{leftTitle}}</h2>
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="availableModuleName"
+      [cdkDropListConnectedTo]="[doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of availableModuleName" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+
+  <div fxFlex="10%">
+
+  </div>
+  <div fxFlex="45%">
+    <h2>{{rightTitle}}</h2>
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="selectedModuleName"
+      [cdkDropListConnectedTo]="[todoList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of selectedModuleName" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+</div>

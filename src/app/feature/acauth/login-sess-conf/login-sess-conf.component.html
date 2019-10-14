@@ -1,0 +1,20 @@
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex="44%" fxFlex.lt-md="10%"></div>
+    <div fxFlex="56%" fxFlex.lt-md="70%">
+        LogIn Session Confirmation ?
+    </div>
+</mat-toolbar>
+<div style="margin: 10% 20%;" *ngIf="(user$ | async) as match" fxLayout="row wrap">
+    <div fxFlex="100%">
+        <b style="font-size: xx-large"> {{match.email || match.uid}} you already have a active login </b>
+    </div>
+    <div fxFlex="100%" fxLayout="row wrap" style="margin-top: 4%">
+        <div fxFlex="73%">
+            <button mat-raised-button color="primary" (click)="proceed(match)">
+                Cancel the existing login and Proceed with new login {{match.email || match.uid}}</button>
+        </div>
+        <div fxFlex="27%">
+            <button mat-raised-button color="warn" (click)="changeUser()">Cancel login</button>
+        </div>
+    </div>
+</div>
